@@ -486,6 +486,51 @@ class Student {
     }
 }
 
+class Section {
+    constructor() {
+        this.sectionNameSpace = {
+            studentList: [],
+            section: [],
+        };
+    }
+
+    /**
+     *
+     *  create student
+     */
+    setStudent() {
+        const temp = new Student();
+        temp.getInput();
+        this.sectionNameSpace.studentList.push(temp);
+    }
+
+    /**
+     *
+     *  add student to the student list
+     */
+    addStudent(student) {
+        this.sectionNameSpace.studentList.push(student);
+    }
+
+    /**
+     *
+     *  @returns {array} - list of suspended students
+     */
+    listOfSuspendedStudent() {
+        const { studentList } = this.sectionNameSpace.studentList;
+        const suspendedStudents = [];
+
+        for (let i = 0; i < studentList.length; i++) {
+            if (studentList[i].getCGPA() < 2.0) {
+                suspendedStudents.push(studentList[i]);
+            }
+        }
+
+        return suspendedStudents;
+    }
+}
+
+// Used IIFE to avoid polluting global namespace of Node.js
 (async () => {
     const obj = new Student();
     await obj.setName();
