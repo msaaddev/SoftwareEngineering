@@ -839,7 +839,7 @@ class Section {
     await obj.setRegNum();
     await obj.setDegree();
 
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 5; i++) {
         console.log('\n');
         await obj.setCourse();
     }
