@@ -13,6 +13,8 @@
 const io = require('console-read-write');
 const cliTable = require('cli-table');
 const colors = require('colors');
+const chalk = require('chalk');
+const clearConsole = require('clear-any-console');
 
 class CourseResult {
     constructor() {
@@ -739,12 +741,15 @@ class Student {
         });
 
         studentInfo.push([
-            `Name: ${this.studentNameSpace.name}`,
-            `Degree: ${this.getDegree()} ${this.getDiscipline()}`,
+            `${chalk.green.bold.inverse(` Name: `)} ${this.studentNameSpace.name}`,
+            `${chalk.green.bold.inverse(` Degree `)} ${this.getDegree()} ${this.getDiscipline()}`,
         ]);
-
-        studentInfo.push([`Registration Number: ${this.studentNameSpace.regNum}`]);
-        studentInfo.push([`Session: ${this.getSession()}`]);
+        studentInfo.push(['']);
+        studentInfo.push([
+            `${chalk.green.bold.inverse(` Reg No#: `)} ${this.studentNameSpace.regNum}`,
+        ]);
+        studentInfo.push(['']);
+        studentInfo.push([`${chalk.green.bold.inverse(` Session: `)} ${this.getSession()}`]);
 
         console.log('\n');
         console.log(studentInfo.toString());
@@ -761,6 +766,8 @@ class Student {
                     'Grade'.yellow,
                 ],
             });
+            console.log('\n');
+            console.log(chalk.keyword('orange').bold.inverse(` Semester: `), sem[i]);
             for (let j = 0; j < semCourses.length; j++) {
                 table.push([
                     semCourses[j].getCourseID(),
@@ -832,10 +839,11 @@ class Section {
     await obj.setRegNum();
     await obj.setDegree();
 
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 1; i++) {
         console.log('\n');
         await obj.setCourse();
     }
 
+    clearConsole();
     obj.toString();
 })();
